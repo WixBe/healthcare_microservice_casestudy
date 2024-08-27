@@ -49,10 +49,10 @@ services:
       - "8100:8100"
     depends_on:
       - mysql
-      - eureka
+      - discovery_service
     networks:
       - mysql
-      - eureka
+      - default
     restart: always
   doctor_service:
     build: ./doctor-service
@@ -63,10 +63,10 @@ services:
       - "8200:8200"
     depends_on:
       - mongo
-      - eureka
+      - discovery_service
     networks:
       - mongo
-      - eureka
+      - default
     restart: always
   appointment_service:
     build: ./appointment-service
@@ -78,9 +78,9 @@ services:
     depends_on:
       - mysql
       - mongo
-      - eureka
+      - discovery_service
     networks:
       - mysql
       - mongo
-      - eureka
+      - default
     restart: always
