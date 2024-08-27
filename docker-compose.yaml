@@ -16,7 +16,7 @@ services:
     image: mysql:latest
     container_name: mysql
     ports:
-      - "3306:3306"
+      - "3305:3306"
     environment:
       MYSQL_ROOT_HOST: '%'
       MYSQL_ROOT_PASSWORD: password
@@ -28,17 +28,16 @@ services:
     networks:
       - mysql
     restart: always
-  discovery_service:
+  eureka:
     build: ./discovery-service
-    container_name: discovery-service
+    container_name: eureka
     environment:
       - SPRING_PROFILES_ACTIVE=prod
     ports:
       - "8761:8761"
-    depends_on:
-      - eureka
     networks:
-      - eureka
+      - mysql
+      - mongo
     restart: always
   patient_service:
     build: ./patient-service
@@ -49,10 +48,9 @@ services:
       - "8100:8100"
     depends_on:
       - mysql
-      - discovery_service
+      - eureka
     networks:
       - mysql
-      - default
     restart: always
   doctor_service:
     build: ./doctor-service
@@ -63,10 +61,9 @@ services:
       - "8200:8200"
     depends_on:
       - mongo
-      - discovery_service
+      - eureka
     networks:
       - mongo
-      - default
     restart: always
   appointment_service:
     build: ./appointment-service
@@ -78,9 +75,8 @@ services:
     depends_on:
       - mysql
       - mongo
-      - discovery_service
+      - eureka
     networks:
       - mysql
       - mongo
-      - default
     restart: always
