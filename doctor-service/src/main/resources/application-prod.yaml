@@ -7,3 +7,11 @@ spring:
   data:
     mongodb:
       uri: mongodb://mongo:27017/doctor-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka/
+
+server:
+  port: 8200

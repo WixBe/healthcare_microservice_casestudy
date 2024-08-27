@@ -7,5 +7,9 @@ spring:
   data:
     mongodb:
       uri: mongodb://mongo:27017/appointment_service
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka/
 server:
     port: 8300

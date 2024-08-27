@@ -9,6 +9,7 @@ spring:
     url: jdbc:mysql://mysql:3306/patient_service
     username: test
     password: test
+
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
@@ -17,3 +18,11 @@ spring:
     properties:
       hibernate:
         format_sql: true # Set to true to format the SQL queries
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka/
+
+server:
+  port: 8100
